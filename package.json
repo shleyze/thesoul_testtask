@@ -14,9 +14,10 @@
     "react-scripts": "5.0.1"
   },
   "devDependencies": {
-    "@types/react": "17.0.20",
-    "@types/react-dom": "17.0.9",
-    "typescript": "4.4.2"
+    "@types/react": "18.0.1",
+    "@types/react-dom": "18.0.6",
+    "prettier": "^2.7.1",
+    "typescript": "4.7.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -29,5 +30,11 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "prettier": {
+    "useTabs": false,
+    "arrowParens": "avoid",
+    "semi": false,
+    "trailingComma": "none"
+  }
 }
