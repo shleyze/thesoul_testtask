@@ -20,6 +20,8 @@ export default function App() {
 
   const handleSubmit = useCallback((data: SchemaType) => {
     setQuery(data)
+
+    return Promise.resolve()
   }, [])
 
   return (
@@ -35,7 +37,7 @@ export default function App() {
       )}
     >
       <div>
-        <SearchBar onSubmit={handleSubmit} isLoading={isValidating} />
+        <SearchBar onSubmit={handleSubmit} />
       </div>
       <div className={cn("flex", "flex-1")}>
         {data && <Table className={cn("grow")} data={data} />}

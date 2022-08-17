@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import { useFormik } from "formik"
 import cn from "classnames"
 
@@ -8,24 +7,21 @@ import type { SchemaType } from "./schema"
 import { SearchIcon } from "../../ui"
 
 type SearchBarProps = {
-  onSubmit?: (data: SchemaType) => void
-  isLoading?: boolean
+  onSubmit?: (data: SchemaType) => Promise<any>
 }
 
-export function SearchBar({ onSubmit, isLoading }: SearchBarProps) {
+export function SearchBar({ onSubmit }: SearchBarProps) {
   const formik = useFormik({
     initialValues: schema.cast({}),
     validationSchema: schema,
     onSubmit: values => {
       if (onSubmit) {
-        onSubmit(values)
+        return onSubmit(values)
       }
+      return Promise.resolve()
     }
   })
 
-  useEffect(() => {
-    formik.setSubmitting(!!isLoading)
-  }, [isLoading])
   return (
     <form onSubmit={formik.handleSubmit}>
       <div className="form-control">
