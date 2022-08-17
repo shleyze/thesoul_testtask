@@ -14,7 +14,7 @@ import type { UserType } from "./api"
 export default function App() {
   const [query, setQuery] = useState<SchemaType | null>(null)
   const { data, error, isValidating } = useSWR<UserType[]>(
-    query ? `https://api.test?${qs.stringify(query)}` : null,
+    `https://api.test?${query && qs.stringify(query)}`,
     getUsers
   )
 
@@ -40,7 +40,13 @@ export default function App() {
         <SearchBar onSubmit={handleSubmit} />
       </div>
       <div className={cn("flex", "flex-1")}>
-        {data && <Table className={cn("grow")} data={data} />}
+        {data && (
+          <Table
+            className={cn("grow")}
+            data={data}
+            searchedText={query?.search}
+          />
+        )}
       </div>
 
       {error && (

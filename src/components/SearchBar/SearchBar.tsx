@@ -40,6 +40,7 @@ export function SearchBar({ onSubmit }: SearchBarProps) {
             onChange={formik.handleChange}
             value={formik.values.search}
           />
+          <span>{formik.values.search.length}</span>
           <button className="btn btn-square" disabled={formik.isSubmitting}>
             <SearchIcon />
           </button>

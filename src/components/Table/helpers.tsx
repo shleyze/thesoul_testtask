@@ -1,9 +1,28 @@
+import { Fragment } from "react"
 import type { ReactNode } from "react"
 import cn from "classnames"
+
 import { UserType } from "../../api"
 
 type ElProps = {
   children?: ReactNode | ReactNode[] | null
+}
+
+function getHighlightedText(text: string, highlight?: string) {
+  if (!highlight) {
+    return text
+  }
+  const parts = text.split(new RegExp(`(${highlight})`, "gi"))
+
+  return parts.map((part, index) => (
+    <Fragment key={index}>
+      {part.toLowerCase() === highlight.toLowerCase() ? (
+        <mark>{part}</mark>
+      ) : (
+        part
+      )}
+    </Fragment>
+  ))
 }
 
 function TH({ children }: ElProps) {
@@ -43,10 +62,10 @@ function TD({ children }: ElProps) {
   )
 }
 
-export const renderRow = (_: any, user: UserType) => (
+export const renderRow = (user: UserType, highlight?: string) => (
   <>
-    <TD>{user.firstName}</TD>
-    <TD>{user.surname}</TD>
+    <TD>{getHighlightedText(user.firstName, highlight)}</TD>
+    <TD>{getHighlightedText(user.surname, highlight)}</TD>
     <TD>{user.phone}</TD>
     <TD>{user.phone}</TD>
   </>

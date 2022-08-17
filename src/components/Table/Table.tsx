@@ -7,10 +7,11 @@ import { renderRow, renderHeader } from "./helpers"
 type TableProps = {
   className?: string
   data: UserType[]
+  searchedText?: string
 }
 
 export function Table(props: TableProps) {
-  const { className, data } = props
+  const { className, data, searchedText } = props
 
   return (
     <TableVirtuoso
@@ -18,7 +19,9 @@ export function Table(props: TableProps) {
       data={data}
       style={{ height: "auto" }}
       fixedHeaderContent={renderHeader}
-      itemContent={renderRow}
+      itemContent={(_n, itemData: UserType) =>
+        renderRow(itemData, searchedText)
+      }
     />
   )
 }

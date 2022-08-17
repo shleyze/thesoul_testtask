@@ -1,4 +1,7 @@
 import { faker } from "@faker-js/faker"
+import qs from "query-string"
+
+import type { SchemaType } from "../components"
 
 export type UserType = {
   firstName: string
@@ -20,14 +23,26 @@ const templateFaker = (): UserType => {
   }
 }
 
-const response = Array(4).fill(null).map(templateFaker)
+const response = Array(10000).fill(null).map(templateFaker)
 
-export const getUsers = (): Promise<UserType[]> => {
+export const getUsers = (url: string): Promise<UserType[]> => {
   const delay = Math.floor(Math.random() * 2000)
+  const parsedUrl = qs.parseUrl(url)
+  const { search } = parsedUrl.query as SchemaType
 
   return new Promise(res => {
     setTimeout(() => {
-      res(response)
+      res(
+        response.filter(({ firstName, surname }) => {
+          if (search) {
+            return (
+              firstName.toLocaleLowerCase().includes(search) ||
+              surname.toLocaleLowerCase().includes(search)
+            )
+          }
+          return true
+        })
+      )
     }, delay)
   })
 }
