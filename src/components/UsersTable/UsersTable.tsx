@@ -4,13 +4,13 @@ import cn from "classnames"
 import type { UserType } from "../../api"
 import { renderRow, renderHeader } from "./helpers"
 
-type TableProps = {
+type UsersTableProps = {
   className?: string
   data: UserType[]
   searchedText?: string
 }
 
-export function Table(props: TableProps) {
+export function UsersTable(props: UsersTableProps) {
   const { className, data, searchedText } = props
 
   return (

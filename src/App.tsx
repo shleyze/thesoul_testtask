@@ -5,7 +5,7 @@ import qs from "query-string"
 
 import "./styles.css"
 
-import { SearchBar, Table } from "./components"
+import { SearchBar, UsersTable } from "./components"
 import type { SchemaType } from "./components"
 import { LoaderIcon, ErrorIcon } from "./ui"
 import { getUsers } from "./api"
@@ -41,7 +41,7 @@ export default function App() {
       </div>
       <div className={cn("flex", "flex-1")}>
         {data && (
-          <Table
+          <UsersTable
             className={cn("grow")}
             data={data}
             searchedText={query?.search}
