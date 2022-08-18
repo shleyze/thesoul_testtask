@@ -53,7 +53,8 @@ export const renderHeader = () => {
     "text-left",
     "bg-slate-50",
     "dark:bg-slate-700",
-    "w-1/4"
+    "w-1/4",
+    "whitespace-nowrap"
   )
 
   return (
